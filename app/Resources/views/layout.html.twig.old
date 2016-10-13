@@ -1,0 +1,166 @@
+{# app/Resources/views/layout.html.twig #}
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;" charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <title>{% block title %}OzyX Platform{% endblock %}</title>
+  {% block stylesheets %}
+    {% stylesheets %}
+    {% endstylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/bootstrap.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/main.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/font-awesome.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/simple-sidebar.css') }}" type="text/css" />
+  {% endblock %}
+</head>
+
+<body class="imgBckgrd">
+  <div class="container wellContent">
+    <header class="row">
+      <div class="col-lg-12">
+        <div id="alertdiv" style="display:none;">
+          Javascript est désactivé sur votre navigateur ! Le site étant dynamique, il nécessite Javascript... 
+          <a href="http://www.libellules.ch/dotclear/index.php?post/2015/05/17/Activer-ou-desactiver-JavaScript-dans-votre-navigateur" target="_blank">
+          Cliquez ici pour savoir comment réactiver Javascript sur vôtre navigateur.</a>
+        </div>
+      
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="headerSlide">
+          <div class="col-lg-7">
+        <!-- Bouton de menu -->
+            <div class="col-lg-3">
+              <div class=" pull-left xsBtnMenuPadd">
+                <li><button type="button" class="btn btn-custom btn-md btnCol collapse in margL" data-toggle="collapse" id="menu-toggle">
+                    <span class="glyphicon glyphicon-indent-right fa-lg" aria-hidden="false"><b style="font-family: 'Brushsci';font-size:30px;"> Cacher le menu</b></span>
+                </button></li>
+              </div>
+            </div>  
+        <!-- Contenu de navbar -->
+            <div class=" col-lg-7" id="pageTitle">
+                <h1 ><b>Bienvenue sur Izix</b></h1>
+                <div class="pageDate img-responsive">Nous sommes le <b style="color:red;">{{'now'|localizeddate('full','none')}}</b> et il est <b><span id="temps" style="color:red;"></span></b></div>
+            </div>
+            <div class="col-lg-2">
+                <img style="position:absoute; display:inline-block; height: 150px;" src="{{  'isisSistre.jpg'|imagine_filter('stripImage') }}" alt=" {{  'isisSistre.jpg' }}" />
+            </div>
+          </div>
+        <!-- Bouton de droite -->
+          <div class="col-lg-5">       
+            <div class="btn-group inline pull-right margR pull-right">
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  <a class="btn btn-primary btn-lg" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+              {% else %}
+                  <a class="btn btn-info btn-lg" href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
+                  <a class="btn btn-primary btn-lg" href="{{ path('fos_user_security_login') }}">Connexion</a>
+                  <div class="text-warning">
+                   Vous n'êtes pas encore authentifié.
+                  </div>
+              {% endif %}
+              {% if is_granted("ROLE_SUPER_ADMIN") %}
+                   <a class="btn btn-warning btn-lg" href="{{ path('ozyx_platform_editUser') }}">Gérer un utilisateur</a>
+              {% endif %}
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  <div class="text-info pageDate"> Bonjour ! Connecté en tant que <strong> {{ app.user.username }} </strong></div>
+              {% endif %}
+            </div>
+          </div> 
+        </nav>
+      </div>
+    </header>
+  </div>
+  <div class="container-fluid">
+      <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+             <ul class="sidebar-nav" style="font-family: 'Brushsci'; font-size:25px; font-weight:bolder;">
+                <li>
+                  <a href="{{ path('ozyx_platform_home') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-navicon fa-stack-1x"></i></span><b>Accueil</b></a>
+                </li>
+                <li class="menuParentQsj"><a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-question fa-stack-1x "></i></span>Qui suis-je ?<i class="fa fa-caret-down"></i></a></li>
+                  <ul class="submenuQsj">
+                      <li>
+                        <a href="{{ path('ozyx_platform_moi') }}"> <span class="fa-stack fa-lg pull-left" ><i class="fa fa-street-view fa-stack-1x"></i></span>Moi-même</a>
+                      </li>                
+                      <li>
+                        <a href="{{ path('ozyx_platform_competences') }}"> <span class="fa-stack fa-lg pull-left" ><i class="fa fa-graduation-cap fa-stack-1x"></i></span>Compétences</a>
+                      </li>
+                      <li>
+                        <a href="{{ path('ozyx_platform_experiences') }}"> <span class="fa-stack fa-lg pull-left" ><i class="fa fa-cogs fa-stack-1x"></i></span>Expériences</a>
+                      </li>
+                  </ul>
+                <li>
+                  <a href="{{ path('ozyx_platform_services') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Mes services</a>
+                </li>
+                <li>
+                  <a href="{{ path('ozyx_platform_contact') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope fa-stack-1x "></i></span>Me Contacter</a>
+                </li>
+                <li>
+                  <a href="{{ path('ozyx_platform_apropos') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-info-circle fa-stack-1x "></i></span>À propos</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12" style="padding-left: 50px">
+                  {% block body %}
+                  {% endblock %}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!--</div>-->
+  <div class="container">
+    <footer class="row">
+      <div class="col-lg-12">
+          <nav class="navbar navbar-inverse navbar-fixed-bottom footerNav" id="footerSlide">
+             IsyX © {{ 'now'|date('Y') }}
+             <div class="pull-right">
+                Responsable du site: {{ webmaster }}<br/>
+                <a style="color:white;" href="{{ path('ozyx_platform_contact') }}"><span class="fa-stack fa-xs pull-left"><i class="fa fa-envelope fa-stack-1x "></i></span>Contact</a>
+             </div>
+          </nav>
+      </div>
+    </footer>
+  </div>
+  </div>
+
+</boby>
+
+{# filter='?uglifyjs2' #}
+{% block javascripts %}
+  {#
+  {% javascripts filter='cssrewrite'
+    'bundles/ozyxplatform/js/jquery-2.2.2.js'
+    'bundles/ozyxplatform/js/bootstrap.js'
+    'bundles/ozyxplatform/js/main.js'
+    'bundles/ozyxplatform/js/sidebar_menu.js'
+    'bundles/ozyxplatform/js/timer.js'
+    'bundles/ozyxplatform/js/width.js'
+    output='js/grp.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  #}
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/main.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/bootstrap.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/jquery-2.2.2.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/sidebar_menu.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/timer.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/width.js') }}" type="text/css"></script>
+    <noscript>
+      <style type="text/css">
+        #body {display:none;}
+        #alertdiv {display:inline-block;z-index: 1500;position: fixed;top:15%;color:red;font-size: 60px}
+      </style>
+    </noscript>
+  {% endjavascripts %}
+{% endblock %}
+</html>

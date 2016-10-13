@@ -1,0 +1,52 @@
+<?php
+// src/ozyx/PlatformBundle/Entity/Enquiry.php
+
+namespace ozyx\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Contact
+ *
+ * @ORM\Table(name="contact")
+ * @ORM\Entity(repositoryClass="ozyx\PlatformBundle\Entity\ContactRepository")
+ */
+class Contact
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     */
+    protected $email;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="subject", type="string", length=255, unique=true)
+     */
+    protected $subject;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="body", type="string")
+     */
+    protected $body;
+}

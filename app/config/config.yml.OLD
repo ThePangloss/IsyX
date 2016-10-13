@@ -1,0 +1,10 @@
+
+oneup_flysystem:
+    adapters:
+        local_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/images/products
+
+    filesystems:
+        local:
+            adapter: local_adapter

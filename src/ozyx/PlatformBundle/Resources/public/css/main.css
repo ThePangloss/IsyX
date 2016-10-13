@@ -1,0 +1,309 @@
+body { 
+  padding-top: 125px; 
+  padding-bottom: 70px;
+}
+@media screen and (max-width: 768px) {
+    body {
+     padding-top: 0px;
+     padding-bottom: 0px;
+   }
+}
+h1{
+  font-size: 60px;
+}
+h3{
+  color: black;
+  padding-bottom: 15px;
+}
+h4{
+  font-size:25px;
+  font-weight:bolder;
+  color:#A950C4;
+}
+h4.special{
+  font-size:30px;
+  color: red !important;
+}
+article{
+  font-size: 17px;
+}
+.visible-lg-block{
+  transition: all 500ms;
+}
+
+/*===========================================*/
+.btnStyle{
+  font-family: 'Brushsci';
+  font-size:30px;
+}
+.imgMoiStyle{
+  position:absolute;
+  display:inline-block;
+  top: 35%;
+  left: 87%;
+  border-radius: 25px;
+  height: 200px;
+}
+.bodyPad{
+  padding-left: 50px;
+}
+.white{
+  color:white;
+}
+.h3Style{
+  font-family:'Brushsci';
+  font-size:55px;
+}
+/*Color---------------------------------------*/
+.purple{
+  color:#A950C4;
+}
+.devAndroid{
+  color: red;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+.lightGreen{
+  color: #32CD32;
+}
+.chocolate{
+  color: #D2691E;
+}
+/*===========================================*/
+/*Menu---------------------------------------*/
+.fullscreen-bg {
+    position: fixed;
+    width: 110%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+.fullscreen-bg__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+	    transform: translate(-50%, -50%);
+}
+@media (max-width: 767px) {
+    .fullscreen-bg {
+        background: url('../images/black.jpg') center center / cover no-repeat;
+    }
+    .fullscreen-bg__video {
+        display: none;
+    }
+}
+#video, .video-js, .vjs-default-skin
+{
+  position: absolute; 
+  right: 0; 
+  bottom: 0;
+  padding: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  width: auto; 
+  height: auto;
+}
+.video-js.vjs-playing .vjs-tech {
+  pointer-events: none;
+}
+.vjs-control-bar { display:none!important; }
+#video {
+	position: absolute;
+	overflow: hidden;
+	height: 100%;
+	bottom: 0;
+	padding-bottom: 0;
+	z-index: 9997;
+}
+
+/*===========================================*/
+.well {
+   background-color: rgba(255, 255, 255, 0.7);
+}
+/*===========================================*/
+/*Text---------------------------------------*/
+#pageTitle{
+  font-family: Bradhitc;
+  color: white;
+  text-align: center;
+  padding-top: 0px;
+  text-shadow: purple 0em 0em 0.3em;
+}
+.pageDate{
+  font-size: 20px;
+}
+.pageCo{
+  font-size: 18px;
+}
+.negTextSpace{
+	word-spacing: -7px
+}
+.topM {
+	padding-top: 25px;
+}
+@font-face {
+  font-family: 'Vladimir';
+  src: url('../fonts/VLADIMIR.TTF');
+}
+@font-face {
+  font-family: 'Bradhitc';
+  src: url('../fonts/BRADHITC.TTF');
+}
+@font-face {
+  font-family: 'Brushsci';
+  src: url('../fonts/BRUSHSCI.TTF');
+}
+.alert-danger {
+  position: relative;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 100%;
+  padding-top: 10px;
+  text-align: center;
+  z-index: 9999
+}
+/*===========================================*/
+/*Height des TexteArea (???)----------------*/
+.conHeight{
+	height: 500px;
+}
+/*===========================================*/
+.margR  {
+  padding-top: 25px;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+.margL  {
+  margin-top: 15px;
+  margin-left: 15px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-right: 0px;
+}
+/*===========================================*/
+.xsBtnMenuPadd  {
+  padding-top: 35px;
+  padding-right: 85px;
+}
+.footerNav{
+  font-size: 20px;
+  padding-right:40px;
+  padding-left:40px;
+}
+.footerStyle{
+  color:white !important;
+  font-family: 'Brushsci' !important;
+}
+/*===========================================*/
+/* Transparence de l'image*/
+.signature{
+    align-self: right;
+    height: 60px;
+    border:0;
+    border-style: none;
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    outline: none;
+    text-indent: -999px;
+}
+
+/*Pour le hover de texte sur une image-------*/
+.textHover {
+    display:none;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0; left:0;
+    text-align:center;
+    color:white;
+}
+.imgContain {
+    position:relative;
+    display:table;
+}
+.imgContain:hover .textHover {
+    display:block;
+}
+/*===========================================*/
+
+/*Custom des buttons de Bootstrap------------*/
+/*Btn Custom*/
+.btn-custom {
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+  padding: 8px;
+}
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+  background-color: #FFFFFF;
+  border-color: #723762;
+}
+.btn-custom.disabled:hover,
+.btn-custom.disabled:focus,
+.btn-custom.disabled:active,
+.btn-custom.disabled.active,
+.btn-custom[disabled]:hover,
+.btn-custom[disabled]:focus,
+.btn-custom[disabled]:active,
+.btn-custom[disabled].active,
+fieldset[disabled] .btn-custom:hover,
+fieldset[disabled] .btn-custom:focus,
+fieldset[disabled] .btn-custom:active,
+fieldset[disabled] .btn-custom.active {
+  background-color: #94487f;
+  border-color: #94487f;
+}
+/*Custom2*/
+.btn-custom2 {
+background-color: #f2ecf1;
+border-color: #94487f;
+}
+.btn-custom2:hover,
+.btn-custom2:focus,
+.btn-custom2:active,
+.btn-custom2.active {
+  background-color: #94487f;
+  border-color: #ddcedb;
+}
+.btn-custom2.disabled:hover,
+.btn-custom2.disabled:focus,
+.btn-custom2.disabled:active,
+.btn-custom2.disabled.active,
+.btn-custom2[disabled]:hover,
+.btn-custom2[disabled]:focus,
+.btn-custom2[disabled]:active,
+.btn-custom2[disabled].active,
+fieldset[disabled] .btn-custom2:hover,
+fieldset[disabled] .btn-custom2:focus,
+fieldset[disabled] .btn-custom2:active,
+fieldset[disabled] .btn-custom2.active {
+  background-color: #94487f;
+  border-color: #f2ecf1;
+
+}
+/*===========================================*/
+/*Custom des navbar------------*/
+.navbar-inverse{
+   background-color: #000000;
+}
+/*
+%kernel.root_dir%/../src/ozyx/PlatformBundle/Resources/public
+*/

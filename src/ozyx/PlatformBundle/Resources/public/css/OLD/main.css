@@ -1,0 +1,9 @@
+
+.imgBckgrd {
+	background-image: url(../../../bundles/ozyxplatform/images/bodyCity.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: 0% 100%;
+    background-repeat: no-repeat;
+    z-index: -1000;
+}

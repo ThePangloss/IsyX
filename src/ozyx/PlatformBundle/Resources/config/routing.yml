@@ -1,0 +1,44 @@
+# src/ozyx/PlatformBundle/Resources/config/routing.yml
+ozyx_platform_home:
+    path:      /
+    defaults:  { _controller: ozyxPlatformBundle:Advert:index }
+
+ozyx_platform_editUser:
+    path:      /editUser
+    defaults:  { _controller: ozyxPlatformBundle:Advert:editUser }
+
+ozyx_platform_contact:
+    path:      /contact
+    defaults:  { _controller: ozyxPlatformBundle:Advert:contact }
+
+ozyx_platform_carousel:
+    path:      /carousel
+    defaults:  { _controller: ozyxPlatformBundle:Advert:carousel }
+
+ozyx_platform_competences:
+    path:      /competences
+    defaults:  { _controller: ozyxPlatformBundle:Advert:competences }
+
+ozyx_platform_experiences:
+    path:      /experiences
+    defaults:  { _controller: ozyxPlatformBundle:Advert:experiences }
+
+ozyx_platform_services:
+    path:      /services
+    defaults:  { _controller: ozyxPlatformBundle:Advert:services }
+
+ozyx_platform_apropos:
+    path:      /apropos
+    defaults:  { _controller: ozyxPlatformBundle:Advert:apropos }
+
+ozyx_platform_moi:
+    path:      /moi
+    defaults:  { _controller: ozyxPlatformBundle:Advert:moi }
+
+ozyx_platform_cv:
+    path:      /cv
+    defaults:  { _controller: ozyxPlatformBundle:Advert:cv }
+
+ozyx_platform_fup:
+    path:      /fup
+    defaults:  { _controller: ozyxPlatformBundle:Advert:fup }

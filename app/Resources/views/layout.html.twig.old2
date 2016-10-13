@@ -1,0 +1,213 @@
+{# app/Resources/views/layout.html.twig #}
+<html lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;" charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <title>{% block title %}IsyX{% endblock %}</title>
+  {% block stylesheets %}
+    {% stylesheets %}
+    {% endstylesheets %}
+      {% if user_info.clientInfo["osN"] == "Android" %}
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/bootstrap.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/font-awesome.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/simple-sidebar.css') }}" type="text/css" />
+        <link rel="stylesheet" href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet" type="text/css" />
+      {% else %}
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/bootstrap.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/main.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/font-awesome.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/ozyxplatform/css/simple-sidebar.css') }}" type="text/css" />
+        <link rel="stylesheet" href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet" type="text/css" />
+      {% endif %}
+  {% endblock %}
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="col-lg-12 fullscreen-bg">
+      {% if user_info.clientInfo["browserN"] == "Safari" %}
+        <video id="video" class="video-js vjs-big-play-centered fullscreen-bg__video vjs-16-9 vjs-fluid" controls="true" autoplay="" preload="auto" loop="" width="auto" height="auto" poster="{{ 'black.jpg'|imagine_filter('stripImage') }}" data-setup="{}">
+        <source src="{{ asset('bundles/ozyxplatform/videos/bckvid.mp4') }}" type='video/mp4'>
+          <p class="vjs-no-js">
+           To view this video please enable JavaScript, and consider upgrading to a web browser that
+           <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+          <script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
+        </video>
+      {% elseif user_info.clientInfo["osN"] == "Android" %}
+      {% else %}
+        <video id="video" class="video-js vjs-big-play-centered fullscreen-bg__video vjs-16-9 vjs-fluid" controls="true" autoplay="" preload="auto" loop="" width="auto" height="auto" poster="{{ 'black.jpg'|imagine_filter('stripImage') }}" data-setup="{}">
+        <source src="{{ asset('bundles/ozyxplatform/videos/bckvid.webm') }}" type='video/webm'>
+          <p class="vjs-no-js">
+           To view this video please enable JavaScript, and consider upgrading to a web browser that
+           <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+          <script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
+        </video>
+      {% endif %}
+    </div>
+  </div>
+  <header class="container-fluid wellContent">
+      <nav class="navbar navbar-inverse navbar-fixed-top" id="headerSlide">
+        <div class="col-lg-7">
+            <!-- Bouton de menu *************************************************************************************************************-->
+            <div class="col-lg-3">
+                <div class="list-unstyled xsBtnMenuPadd pull-left">
+                  <button type="button" class="btn btn-custom " data-toggle="collapse" id="menu-toggle">
+                      <span class="glyphicon glyphicon-indent-right fa-lg" aria-hidden="false"><b class="btnStyle"> Cacher le menu</b></span>
+                  </button>
+                </div>
+            </div>  
+            <!-- Contenu de navbar ***********************************************************************************************************-->
+            <div class=" col-lg-7" id="pageTitle">
+                <h1><b>Bienvenue sur Isix</b></h1>
+                   {% if user_info.clientInfo["osN"] == "Android" %}
+                      <h3 class="bg-danger devAndroid"><b>La version portable est en cours de développement !</b></h3>
+                   {% endif %}
+                <div class="pageDate img-responsive">Nous sommes le <b class="purple">{{'now'|localizeddate('full','none')}}</b> et il est <b><span class="purple" id="temps"></span></b></div>
+            </div>
+            <div class="col-lg-2">
+                <img class="imgBanStyle" src="{{ 'isis.jpg'|imagine_filter('stripImage') }}" alt=" {{ 'isis.jpg' }}" />
+            </div>
+        </div>
+        <!-- Bouton de droite ****************************************************************************************************************-->
+        <div class="col-lg-4 pull-right ">       
+          <div class="btn-toolbar pull-right margR">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a class="btn btn-primary btn-lg pull-right" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+            {% else %}
+                <a class="btn btn-info btn-lg pull-right" href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
+                <a class="btn btn-primary btn-lg pull-right" href="{{ path('fos_user_security_login') }}">Connexion</a>
+            {% endif %}
+            
+            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                <a class="btn btn-warning btn-lg pull-right" href="{{ path('ozyx_platform_editUser') }}">Gérer un utilisateur</a>
+            {% endif %}
+          </div> 
+        </div>     
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div class="text-info pageCo pull-right" > Bonjour ! Connecté en tant que <strong> {{ app.user.username }} </strong></div>
+        {% else %}
+            <div class="text-warning pageCo pull-right">Vous n'êtes pas encore authentifié.</div>
+        {% endif %}
+      </nav>
+  </header>
+  <div class="container-fluid">
+      <div id="wrapper">
+        <!-- Sidebar -->
+          <div id="sidebar-wrapper">
+               <ul class="sidebar-nav sideBarStyle">
+                  <li>
+                    <a href="{{ path('ozyx_platform_home') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-navicon fa-stack-1x"></i></span><b>Accueil</b></a>
+                  </li>
+                  <li class="menuParentQsj"><a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-question fa-stack-1x "></i></span>Qui suis-je ?<i class="fa fa-caret-down"></i></a></li>
+                    <ul class="submenuQsj list-unstyled">
+                        <li class="subMenuList">
+                          <a href="{{ path('ozyx_platform_moi') }}"> <span class="fa-stack fa-lg pull-left" ><i class="fa fa-street-view fa-stack-1x"></i></span>Moi-même</a>
+                        </li>                
+                        <li class="subMenuList">
+                          <a href="{{ path('ozyx_platform_competences') }}"> <span class="fa-stack fa-lg pull-left" ><i class="fa fa-graduation-cap fa-stack-1x"></i></span>Compétences</a>
+                        </li>
+                        <li class="subMenuList">
+                          <a href="{{ path('ozyx_platform_experiences') }}"> <span class="fa-stack fa-lg pull-left" ><i class="fa fa-cogs fa-stack-1x"></i></span>Expériences</a>
+                        </li>
+                    </ul>
+                  <li>
+                    <a href="{{ path('ozyx_platform_services') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Mes services</a>
+                  </li>
+                  <li>
+                    <a href="{{ path('ozyx_platform_contact') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope fa-stack-1x "></i></span>Me Contacter</a>
+                  </li>
+                  <li>
+                    <a href="{{ path('ozyx_platform_apropos') }}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-info-circle fa-stack-1x "></i></span>À propos</a>
+                  </li>
+                  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  <li>
+                    <a href="{{ path('fos_user_profile_show') }}" style="color:chocolate"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Mon profil</a>
+                  </li>
+                  {% endif %}
+              </ul>
+          </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div class="container container-full">
+              <div class="row">
+                <div class="col-lg-12 bodyPad">
+                  {% block body %}
+                  {% endblock %}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!--</div>-->
+  <div class="container">
+    <footer class="row">
+        <nav class="navbar navbar-inverse navbar-fixed-bottom footerNav" id="footerSlide">
+          <div class="row">
+              <div class="col-lg-5">
+                 IsyX © {{ 'now'|date('Y') }}
+              </div>
+              <div class="col-lg-7">
+                  <div class="pull-right">
+                    Responsable du site: {{ webmaster }}<br/>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-7">
+                 <!--<div class="pull-left">
+                     <div class="text-info">  </div>
+                 </div>-->
+              </div>
+              <div class="col-lg-5">
+                  <div class="pull-right">
+                    <a class="white" href="{{ path('ozyx_platform_contact') }}"><span class="fa-stack fa-xs pull-left"><i class="fa fa-envelope fa-stack-1x "></i></span>Contact</a>
+                  </div>
+              </div>
+          </div>
+        </nav>
+    </footer>
+  </div>
+
+
+</boby>
+
+{# filter='?uglifyjs2' #}
+{% block javascripts %}
+  {% javascripts %}
+  {% endjavascripts %}
+   {% if user_info.clientInfo["osN"] == "Android" %}
+
+   {% else %}
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/main.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/bootstrap.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/jquery-2.2.2.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/sidebar_menu.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/timer.js') }}" type="text/css"></script>
+   <script type="text/javascript" src="{{ asset('bundles/ozyxplatform/js/width.js') }}" type="text/css"></script>
+   <!-- Support de IE8 -->
+   <script type="text/javascript" src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js" type="text/css"></script>
+   <script>videojs.options.children.loadingSpinner = false;</script>
+   <noscript>
+      <div class="alert alert-danger" role="alert">
+          <strong>Attention!</strong> Javascript est désactivé sur votre navigateur ! Le site étant dynamique, il nécessite Javascript...
+          <a href="http://www.libellules.ch/dotclear/index.php?post/2015/05/17/Activer-ou-desactiver-JavaScript-dans-votre-navigateur" target="_blank">
+        Cliquez ici pour savoir comment réactiver Javascript sur vôtre navigateur.</a>
+      </div>
+   </noscript>
+   <!--</div>-->
+   {% endif %}
+{% endblock %}
+<!--
+<div class="visible-lg  visible-md">Coucou sur un visible lg !</div>
+<div class="visible-xs">Coucou sur un hidden md up !</div>
+</strong>
+-->
+</html>
